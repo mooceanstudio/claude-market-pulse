@@ -1,12 +1,12 @@
 # Market Pulse 📈
 
-**Live crypto market dashboard — zero dependencies, self-updating, built end-to-end with [Claude Code](https://claude.com/claude-code).**
+**Live crypto market dashboard — zero dependencies, self-updating, and fully automated.**
 
-[![Update data snapshot](https://github.com/mooceanstudio/claude-market-pulse/actions/workflows/update-data.yml/badge.svg)](https://github.com/mooceanstudio/claude-market-pulse/actions/workflows/update-data.yml)
-[![Deploy to GitHub Pages](https://github.com/mooceanstudio/claude-market-pulse/actions/workflows/deploy-pages.yml/badge.svg)](https://github.com/mooceanstudio/claude-market-pulse/actions/workflows/deploy-pages.yml)
+[![Update data snapshot](https://github.com/mooceanstudio/market-pulse/actions/workflows/update-data.yml/badge.svg)](https://github.com/mooceanstudio/market-pulse/actions/workflows/update-data.yml)
+[![Deploy to GitHub Pages](https://github.com/mooceanstudio/market-pulse/actions/workflows/deploy-pages.yml/badge.svg)](https://github.com/mooceanstudio/market-pulse/actions/workflows/deploy-pages.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
-**Live demo → https://mooceanstudio.github.io/claude-market-pulse/**
+**Live demo → https://mooceanstudio.github.io/market-pulse/**
 
 ![Market Pulse dashboard](docs/screenshot-light.png)
 
@@ -24,17 +24,12 @@
   - a GitHub Action commits an hourly data snapshot (`data/snapshot.json`), so the dashboard degrades gracefully to cached data when the live API is rate-limited or unreachable — the UI tells you which source you're seeing
   - every push (including the bot's snapshot commits) auto-deploys to GitHub Pages
 
-## Built with Claude Code — not just *using* Claude
+## Highlights
 
-This repo doubles as a demonstration of a real Claude Code project setup:
-
-| Piece | What it shows |
-|---|---|
-| [`CLAUDE.md`](CLAUDE.md) | Project memory: architecture, verify steps, design-system rules and API gotchas that keep every future Claude session consistent |
-| [`.claude/skills/add-widget/`](.claude/skills/add-widget/SKILL.md) | A **custom Claude Skill** that scaffolds new dashboard widgets — form choice, data wiring, mark specs, and a verification checklist — so "add a widget" is a one-prompt operation |
-| The Fear & Greed tile | **The skill in action**: this widget was added *after* the initial release by following `add-widget` end-to-end — new API source wired into both the live fetch and the snapshot fallback, meter component, both-theme verification — in a single short session |
-| [`.github/workflows/`](.github/workflows/) | Automation authored by Claude Code: hourly data cron + Pages deploy |
-| Design system | Chart colors come from a colorblind-validated palette (CVD-checked in both themes), one-hue-per-measure, no dual axes, tooltips built with `textContent` against untrusted API strings |
+- **Zero dependencies** — plain ES modules + hand-rolled SVG, no framework or build step.
+- **Self-healing data** — an hourly GitHub Action commits a snapshot so the dashboard falls back to cached data when the live API is rate-limited or unreachable.
+- **Accessible design system** — a colorblind-validated categorical palette (checked in both themes), one hue per measure, no dual axes, and tooltips built with `textContent` against untrusted API strings.
+- **One-way data flow** — `fetchData() -> state.data -> renderAll()`; see [`PROJECT.md`](PROJECT.md) for architecture and design rules.
 
 ## Architecture
 
@@ -61,8 +56,8 @@ scripts/fetch-snapshot.mjs snapshot fetcher (run by the hourly Action)
 No install, no build:
 
 ```bash
-git clone https://github.com/mooceanstudio/claude-market-pulse.git
-cd claude-market-pulse
+git clone https://github.com/mooceanstudio/market-pulse.git
+cd market-pulse
 python3 -m http.server 8080   # any static server works
 # open http://localhost:8080
 ```

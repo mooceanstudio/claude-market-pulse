@@ -1,6 +1,6 @@
 // Hand-rolled SVG charts — no chart library.
 //
-// Mark specs (see CLAUDE.md § Design system):
+// Mark specs (see PROJECT.md § Design system):
 //   lines 2px round join/cap · end markers r4 with a 2px surface ring ·
 //   bars ≤24px thick, 4px rounded data-end, square at the baseline ·
 //   hairline solid gridlines · text wears text tokens, never series color.
