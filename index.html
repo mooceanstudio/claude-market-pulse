@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Market Pulse — live crypto dashboard</title>
+  <meta name="description" content="Live cryptocurrency market dashboard: real-time prices, charts and tables. Zero dependencies, built with Claude Code.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📈</text></svg>">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <h1>Market Pulse</h1>
+      <span class="brand-sub">crypto market overview</span>
+    </div>
+    <div class="controls">
+      <div class="refresh" id="refresh-control">
+        <span class="live-dot" id="live-dot" aria-hidden="true"></span>
+        <span id="refresh-status" role="status">connecting…</span>
+        <button id="pause-btn" type="button" aria-label="Pause auto-refresh">Pause</button>
+      </div>
+      <button id="theme-btn" type="button" aria-label="Toggle color theme">☾</button>
+    </div>
+  </header>
+
+  <main class="dashboard">
+    <!-- Filter row: scopes every chart below it -->
+    <div class="filter-row" role="toolbar" aria-label="Time range">
+      <span class="filter-label">Range</span>
+      <div class="segmented" id="range-picker">
+        <button type="button" data-hours="24">24h</button>
+        <button type="button" data-hours="72">3d</button>
+        <button type="button" data-hours="168" class="selected" aria-pressed="true">7d</button>
+      </div>
+      <span class="filter-note" id="data-note"></span>
+    </div>
+
+    <!-- Stat tiles -->
+    <section class="tiles" id="tiles" aria-label="Market summary"></section>
+
+    <!-- Charts -->
+    <section class="grid">
+      <article class="card card-wide">
+        <div class="card-head">
+          <h2>Relative performance</h2>
+          <p class="card-sub">Top 5 coins by market cap (stablecoins excluded), indexed to 0% at range start</p>
+        </div>
+        <div class="chart" id="perf-chart"></div>
+        <div class="legend" id="perf-legend" aria-label="Series legend"></div>
+      </article>
+
+      <article class="card">
+        <div class="card-head">
+          <h2>24h trading volume</h2>
+          <p class="card-sub">Top 8 coins, USD</p>
+        </div>
+        <div class="chart" id="volume-chart"></div>
+      </article>
+    </section>
+
+    <!-- Table -->
+    <section class="card">
+      <div class="card-head">
+        <h2>Top 10 by market cap</h2>
+        <p class="card-sub">Click a column header to sort</p>
+      </div>
+      <div class="table-wrap">
+        <table id="market-table">
+          <thead></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <p>Data: <a href="https://www.coingecko.com/en/api" rel="noopener">CoinGecko API</a> · refreshes every 60s ·
+      hourly snapshot committed by <a href="https://github.com/mooceanstudio/claude-market-pulse/actions" rel="noopener">GitHub Actions</a></p>
+    <p>Built with <a href="https://claude.com/claude-code" rel="noopener">Claude Code</a> · zero runtime dependencies · <a href="https://github.com/mooceanstudio/claude-market-pulse" rel="noopener">source</a></p>
+  </footer>
+
+  <div class="tooltip" id="tooltip" role="tooltip" hidden></div>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
